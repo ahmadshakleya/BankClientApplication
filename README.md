@@ -13,4 +13,4 @@ To deploy the client-side application, follow these steps:
 4. Run the following command:
 
 ```bash
-./mvnw spring-boot:run
+mvn spring-boot:run

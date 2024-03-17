@@ -174,7 +174,7 @@ public class ClientService {
             String addMoneyUrl = baseUrl + "/add?bankNumber=" + bankNumber + "&amount=" + amount;
 
             // Make the request using restTemplate.put(...)
-            ResponseEntity<String> response = restTemplate.postForEntity(addMoneyUrl, null, String.class);
+            ResponseEntity<String> response = restTemplate.exchange(addMoneyUrl, HttpMethod.PUT, null, String.class);
 
             // Handle the response
             if (response.getStatusCode() == HttpStatus.OK) {
