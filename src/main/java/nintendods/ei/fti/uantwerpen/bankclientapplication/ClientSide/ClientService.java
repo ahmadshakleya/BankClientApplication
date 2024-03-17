@@ -16,6 +16,8 @@ public class ClientService {
     private final Scanner scanner;
     private String baseUrl = null;
 
+    private boolean connected = false;
+
     @Autowired
     public ClientService(RestTemplate restTemplate, Scanner scanner) {
         this.restTemplate = restTemplate;
@@ -23,7 +25,6 @@ public class ClientService {
     }
 
     public void interactWithServer() {
-        boolean connected = false;
         while (!connected) {
             System.out.println("Do you want to connect to a server? (yes/no)");
             String choice = scanner.nextLine();
@@ -85,10 +86,13 @@ public class ClientService {
 
         baseUrl = "http://" + serverIp + ":" + serverPort;
         System.out.println("Connected to server: " + baseUrl);
+        connected = true;
+        interactWithServer();
     }
 
     private void disconnect() {
         baseUrl = null;
+        connected = false;
         System.out.println("Do you want to connect to another server? (yes/no)");
         String choice = scanner.nextLine();
         if ("yes".equalsIgnoreCase(choice)) {
