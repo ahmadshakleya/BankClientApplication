@@ -121,16 +121,22 @@ public class ClientService {
 
             // Construct the request URL
             String createAccountUrl = baseUrl + "/createAccount?name=" + name + "&bankNumber=" + bankNumber + "&initialBalance=" + initialBalance;
-            // Make the HTTP request
-            ResponseEntity<String> response = restTemplate.postForEntity(createAccountUrl, null, String.class);
 
-            // Handle the response
-            if (response.getStatusCode() == HttpStatus.OK) {
-                //System.out.println("Account created successfully.");
-                System.out.println("Response: \n" + response.getBody());
-            } else {
-                //System.out.println("Error creating account. Status code: " + response.getStatusCodeValue());
-                System.out.println("Error message: \n" + response.getBody());
+            try {
+                // Make the HTTP request
+                ResponseEntity<String> response = restTemplate.postForEntity(createAccountUrl, null, String.class);
+
+                // Handle the response
+                if (response.getStatusCode() == HttpStatus.OK) {
+                    //System.out.println("Account created successfully.");
+                    System.out.println("Response: \n" + response.getBody());
+                } else {
+                    //System.out.println("Error creating account. Status code: " + response.getStatusCodeValue());
+                    System.out.println("Error message: \n" + response.getBody());
+                }
+
+            } catch (IllegalArgumentException e) {
+                System.out.println("Error: " + e.getMessage());
             }
         } else {
             connect();
@@ -145,18 +151,21 @@ public class ClientService {
 
             // Construct the HTTP request
             String getBalanceUrl = baseUrl + "/balance?bankNumber=" + bankNumber;
+            try {
+                // Make the request using restTemplate.getForEntity(...)
+                ResponseEntity<String> response = restTemplate.getForEntity(getBalanceUrl, String.class);
 
-            // Make the request using restTemplate.getForEntity(...)
-            ResponseEntity<String> response = restTemplate.getForEntity(getBalanceUrl, String.class);
-
-            // Handle the response
-            if (response.getStatusCode() == HttpStatus.OK) {
-                //System.out.println("Balance for bank number " + bankNumber + ": " + response.getBody());
-                System.out.println("Response: \n" + response.getBody());
-            } else {
-                //System.out.println("Error retrieving balance. Status code: " + response.getStatusCodeValue());
-                //System.out.println("Error message: " + response.getBody());
-                System.out.println("Error message: \n" + response.getBody());
+                // Handle the response
+                if (response.getStatusCode() == HttpStatus.OK) {
+                    //System.out.println("Balance for bank number " + bankNumber + ": " + response.getBody());
+                    System.out.println("Response: \n" + response.getBody());
+                } else {
+                    //System.out.println("Error retrieving balance. Status code: " + response.getStatusCodeValue());
+                    //System.out.println("Error message: " + response.getBody());
+                    System.out.println("Error message: \n" + response.getBody());
+                }
+            } catch (IllegalArgumentException e) {
+                System.out.println("Error: " + e.getMessage());
             }
         } else {
             connect();
@@ -176,18 +185,21 @@ public class ClientService {
 
             // Construct the HTTP request
             String addMoneyUrl = baseUrl + "/add?bankNumber=" + bankNumber + "&amount=" + amount;
+            try {
+                // Make the request using restTemplate.put(...)
+                ResponseEntity<String> response = restTemplate.exchange(addMoneyUrl, HttpMethod.PUT, null, String.class);
 
-            // Make the request using restTemplate.put(...)
-            ResponseEntity<String> response = restTemplate.exchange(addMoneyUrl, HttpMethod.PUT, null, String.class);
-
-            // Handle the response
-            if (response.getStatusCode() == HttpStatus.OK) {
-                //System.out.println("Money added successfully.");
-                //System.out.println("New balance: " + response.getBody());
-                System.out.println("Response: \n" + response.getBody());
-            } else {
-                //System.out.println("Error adding money. Status code: " + response.getStatusCodeValue());
-                System.out.println("Error message: \n" + response.getBody());
+                // Handle the response
+                if (response.getStatusCode() == HttpStatus.OK) {
+                    //System.out.println("Money added successfully.");
+                    //System.out.println("New balance: " + response.getBody());
+                    System.out.println("Response: \n" + response.getBody());
+                } else {
+                    //System.out.println("Error adding money. Status code: " + response.getStatusCodeValue());
+                    System.out.println("Error message: \n" + response.getBody());
+                }
+            } catch (IllegalArgumentException e) {
+                System.out.println("Error: " + e.getMessage());
             }
         } else {
             connect();
@@ -208,18 +220,22 @@ public class ClientService {
             // Construct the HTTP request
             String removeMoneyUrl = baseUrl + "/remove?bankNumber=" + bankNumber + "&amount=" + amount;
 
-            // Make the request using restTemplate.exchange(...)
-            ResponseEntity<String> response = restTemplate.exchange(removeMoneyUrl, HttpMethod.DELETE, null, String.class);
+            try {
+                // Make the request using restTemplate.exchange(...)
+                ResponseEntity<String> response = restTemplate.exchange(removeMoneyUrl, HttpMethod.DELETE, null, String.class);
 
-            // Handle the response
-            if (response.getStatusCode() == HttpStatus.OK) {
-                //System.out.println("Money removed successfully.");
-                //System.out.println("New balance: " + response.getBody());
-                System.out.println("Response: \n" + response.getBody());
-            } else {
-                //System.out.println("Error removing money. Status code: " + response.getStatusCodeValue());
-                //System.out.println("Error message: " + response.getBody());
-                System.out.println("Error message: \n" + response.getBody());
+                // Handle the response
+                if (response.getStatusCode() == HttpStatus.OK) {
+                    //System.out.println("Money removed successfully.");
+                    //System.out.println("New balance: " + response.getBody());
+                    System.out.println("Response: \n" + response.getBody());
+                } else {
+                    //System.out.println("Error removing money. Status code: " + response.getStatusCodeValue());
+                    //System.out.println("Error message: " + response.getBody());
+                    System.out.println("Error message: \n" + response.getBody());
+                }
+            } catch (IllegalArgumentException e) {
+                System.out.println("Error: " + e.getMessage());
             }
         } else {
             connect();
@@ -243,17 +259,20 @@ public class ClientService {
             // Construct the HTTP request
             String transferMoneyUrl = baseUrl + "/transfer?sourceBankNumber=" + sourceBankNumber +
                     "&destinationBankNumber=" + destinationBankNumber + "&amount=" + amount;
+            try {
+                // Make the request using restTemplate.postForEntity(...)
+                ResponseEntity<String> response = restTemplate.postForEntity(transferMoneyUrl, null, String.class);
 
-            // Make the request using restTemplate.postForEntity(...)
-            ResponseEntity<String> response = restTemplate.postForEntity(transferMoneyUrl, null, String.class);
-
-            // Handle the response
-            if (response.getStatusCode() == HttpStatus.OK) {
-                //System.out.println("Transfer successful.");
-                System.out.println("Response: \n" + response.getBody());
-            } else {
-                //System.out.println("Error transferring money. Status code: " + response.getStatusCodeValue());
-                System.out.println("Error message: \n" + response.getBody());
+                // Handle the response
+                if (response.getStatusCode() == HttpStatus.OK) {
+                    //System.out.println("Transfer successful.");
+                    System.out.println("Response: \n" + response.getBody());
+                } else {
+                    //System.out.println("Error transferring money. Status code: " + response.getStatusCodeValue());
+                    System.out.println("Error message: \n" + response.getBody());
+                }
+            } catch (IllegalArgumentException e) {
+                System.out.println("Error: " + e.getMessage());
             }
         } else {
             connect();
