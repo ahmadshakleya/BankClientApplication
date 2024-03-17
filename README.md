@@ -1,6 +1,7 @@
 # Bank Application Client-Side
 
-This is the client-side application for the simple banking system developed in Java.
+This is the client-side application for the simple banking system developed in Java. This Bank Server Application can be found at:
+[GitHub Repository](https://github.com/ahmadshakleya/6_DS_BankApplication)
 
 ## Deployment
 
