@@ -135,7 +135,7 @@ public class ClientService {
                     System.out.println("Error message: \n" + response.getBody());
                 }
 
-            } catch (IllegalArgumentException e) {
+            } catch (Exception e) {
                 System.out.println("Error: " + e.getMessage());
             }
         } else {
@@ -164,7 +164,7 @@ public class ClientService {
                     //System.out.println("Error message: " + response.getBody());
                     System.out.println("Error message: \n" + response.getBody());
                 }
-            } catch (IllegalArgumentException e) {
+            } catch (Exception e) {
                 System.out.println("Error: " + e.getMessage());
             }
         } else {
@@ -198,7 +198,7 @@ public class ClientService {
                     //System.out.println("Error adding money. Status code: " + response.getStatusCodeValue());
                     System.out.println("Error message: \n" + response.getBody());
                 }
-            } catch (IllegalArgumentException e) {
+            } catch (Exception e) {
                 System.out.println("Error: " + e.getMessage());
             }
         } else {
@@ -234,7 +234,7 @@ public class ClientService {
                     //System.out.println("Error message: " + response.getBody());
                     System.out.println("Error message: \n" + response.getBody());
                 }
-            } catch (IllegalArgumentException e) {
+            } catch (Exception e) {
                 System.out.println("Error: " + e.getMessage());
             }
         } else {
@@ -271,7 +271,7 @@ public class ClientService {
                     //System.out.println("Error transferring money. Status code: " + response.getStatusCodeValue());
                     System.out.println("Error message: \n" + response.getBody());
                 }
-            } catch (IllegalArgumentException e) {
+            } catch (Exception e) {
                 System.out.println("Error: " + e.getMessage());
             }
         } else {
